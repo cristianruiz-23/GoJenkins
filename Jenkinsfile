@@ -1,18 +1,22 @@
 pipeline {
-    agent { label 'agent4' }
+     agent { label 'agent4' }
+
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/cristianruiz-23/GoJenkins.git'
+                git url: 'https://github.com/cristianruiz-23/GoJenkins.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'go build ./...'
             }
         }
         stage('Test') {
             steps {
-                sh 'go test ./... -v -json > result.json'
+                sh 'go test ./...'
             }
         }
     }
-
-
 }
